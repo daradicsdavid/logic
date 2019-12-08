@@ -7,7 +7,7 @@ import flow.Wire;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractGate extends AbstractNode implements Gate {
+public abstract class AbstractGate extends AbstractNode implements Gate, Comparable<AbstractGate> {
     private List<Wire> inputs;
     private List<Wire> outputs;
 
@@ -64,4 +64,20 @@ public abstract class AbstractGate extends AbstractNode implements Gate {
     }
 
     protected abstract Bit calculateResult(Bit[] bits);
+
+    @Override
+    public int compareTo(AbstractGate o) {
+        int size = this.inputs.size();
+        int oSize = o.inputs.size();
+        if (size == oSize) {
+            return 0;
+        }
+        if (size < oSize) {
+            return -1;
+        }
+        if (size > oSize) {
+            return 1;
+        }
+        return new Integer(size).compareTo(oSize);
+    }
 }
