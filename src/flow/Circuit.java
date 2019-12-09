@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class Circuit {
@@ -18,7 +19,6 @@ public class Circuit {
 
     public Circuit(String path) {
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
-
             stream.forEach(line -> {
                 if (line.startsWith("NODE")) {
                     createNode(line.split(" "));
